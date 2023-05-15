@@ -61,16 +61,13 @@ namespace NietGrappigNetwerkDing
         {
             try
             {
-                Console.WriteLine("Geef de IP waarvan je iets wilt krijgen");
-                // Define the listening IP address and port
-                string listeningIP = Console.ReadLine(); // Change to the listening IP address
                 int port = 13000; // Change to the listening port
 
                 // Create a TCP/IP socket
                 using (Socket receiverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
                 {
                     // Bind the socket to the listening IP address and port
-                    receiverSocket.Bind(new IPEndPoint(IPAddress.Parse(listeningIP), port));
+                    receiverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
 
                     // Start listening for incoming connections
                     receiverSocket.Listen(1);
@@ -107,9 +104,6 @@ namespace NietGrappigNetwerkDing
         {
             try
             {
-                Console.WriteLine("Geef de IP waarvan je iets wilt krijgen");
-                // Define the listening IP address and port
-                string listeningIP = Console.ReadLine(); // Change to the listening IP address
                 Console.WriteLine("Geef de IP waarnaar je iets wil sturen");
                 // Define the recipient's IP address and port
                 string recipientIP = Console.ReadLine(); // Change to the recipient's IP address
@@ -119,7 +113,7 @@ namespace NietGrappigNetwerkDing
                 using (Socket receiverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
                 {
                     // Bind the socket to the listening IP address and port
-                    receiverSocket.Bind(new IPEndPoint(IPAddress.Parse(listeningIP), port));
+                    receiverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
 
                     // Start listening for incoming connections
                     receiverSocket.Listen(1);
