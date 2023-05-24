@@ -121,7 +121,7 @@ namespace NietGrappigNetwerkDing
 
         static void ReceiveMessageOption()
         {
-            ReceiveMessage(false);
+            ReceiveMessage(true);
         }
 
         static void AddToMessageLine()
