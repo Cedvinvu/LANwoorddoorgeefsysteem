@@ -22,6 +22,7 @@ namespace NietGrappigNetwerkDing
             menu.AddOption('4', "Verander bericht", ChangeMessage);
             menu.AddOption('5', "Verander IP", ChangeIP);
             menu.AddOption('6', "Verander Naam", ChangeName);
+            menu.AddOption('7', "Test de connectie", TestConnection);
             menu.Start();
         }
 
@@ -70,7 +71,7 @@ namespace NietGrappigNetwerkDing
 
                     Socket clientSocket = receiverSocket.Accept(); // Accept the incoming connection
                     Console.WriteLine("Connection accepted.");
- 
+
                     byte[] buffer = new byte[1024]; // Receive the message from the sender
                     int bytesRead = clientSocket.Receive(buffer);
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
@@ -91,6 +92,27 @@ namespace NietGrappigNetwerkDing
             Console.ReadLine();
             return null;
         }
+
+        static void TestConnection()
+        {
+            try
+            {
+                using (Socket senderSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)) // Create a TCP/IP socket
+                {
+                    Console.WriteLine("Connecteren...");
+                    senderSocket.Connect(IPAddress.Parse(IPaanvanger), port); // Connect to the recipient
+                    Console.WriteLine("U bent geconnecteerd!");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+
+            Console.WriteLine("Press Enter to exit...");
+            Console.ReadLine();
+        }
+
 
         static void SendMessageOption()
         {
