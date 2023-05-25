@@ -1,6 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Net;
 using System.Text;
+using System;
 using SMUtils;
 
 namespace NietGrappigNetwerkDing
@@ -23,6 +24,7 @@ namespace NietGrappigNetwerkDing
             menu.AddOption('5', "Verander IP", ChangeIP);
             menu.AddOption('6', "Verander Naam", ChangeName);
             menu.AddOption('7', "Test de connectie", TestConnection);
+            menu.AddOption('8', "Zie IP", GetLocalIPAddress);
             menu.Start();
         }
 
@@ -147,6 +149,23 @@ namespace NietGrappigNetwerkDing
         {
             Console.WriteLine("Geef naam:");
             naam = Console.ReadLine();
+        }
+        static void GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    if (ip.ToString().StartsWith("192.168."))
+                    {
+                        Console.WriteLine("uw IP: " + ip.ToString());
+                    }
+                }
+            }
+
+            Console.WriteLine("Press Enter to exit...");
+            Console.ReadLine();
         }
 
     }
